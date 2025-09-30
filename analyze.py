@@ -3,6 +3,7 @@ import matplotlib
 import matplotlib.pyplot
 import time
 import math
+from constants import *
 
 LEFT_EDGE = -1000
 RIGHT_EDGE = 1000
@@ -51,11 +52,11 @@ def draw_execution_time(n, samples_sorting, samples_summary, samples_square,):
     matplotlib.pyplot.show()
 
 
-def draw_compare_for_sorting(n, sort_time):
+def draw_compare_for_sorting(n, sort_time, c):
     """Common sort function has O(n*log(n)) difficulty"""
     matplotlib.pyplot.plot(n, sort_time, label="Fact time")
 
-    y = [i * math.log2(i) for i in n]
+    y = [i * math.log2(i) * c for i in n]
     matplotlib.pyplot.plot(n, y, label="Expecting time")
 
     matplotlib.pyplot.title("1. Sorting algorithm")
@@ -65,8 +66,36 @@ def draw_compare_for_sorting(n, sort_time):
     matplotlib.pyplot.show()
 
 
+def draw_compare_for_summary(n, sum_time, c):
+    """Common sum function has O(n) difficulty"""
+    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
+
+    y = [i * c for i in n]
+    matplotlib.pyplot.plot(n, y, label="Expecting time")
+
+    matplotlib.pyplot.title("2. Summary algorithm")
+    matplotlib.pyplot.xlabel("Count of numbers")
+    matplotlib.pyplot.ylabel("Time, ns")
+    matplotlib.pyplot.legend()
+    matplotlib.pyplot.show()
+
+
+def draw_compare_for_square(n, sum_time, c):
+    """Our square function has O(n) difficulty"""
+    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
+
+    y = [i * c for i in n]
+    matplotlib.pyplot.plot(n, y, label="Expecting time")
+
+    matplotlib.pyplot.title("3. Square algorithm")
+    matplotlib.pyplot.xlabel("Count of numbers")
+    matplotlib.pyplot.ylabel("Time, ns")
+    matplotlib.pyplot.legend()
+    matplotlib.pyplot.show()
+
+
 def part_1():
-    n = [10000, 11000, 12000, 13000, 50000]
+    n = [100000, 110000, 120000, 130000, 200000]
     #n = [1, 2, 5, 7, 10, 15, 20, 30, 50, 70, 100, 150, 200]
 
     samples_sorting = []
@@ -88,7 +117,14 @@ def part_1():
 
     #draw_execution_time(n, samples_sorting, samples_summary, samples_square)
 
-    draw_compare_for_sorting(n, samples_sorting)
+    c = calculate_c_n_log_n(n, samples_sorting)
+    draw_compare_for_sorting(n, samples_sorting, c)
+
+    c = calculate_c_for_linear(n, samples_summary)
+    draw_compare_for_summary(n, samples_summary, c)
+
+    c = calculate_c_for_linear(n, samples_square)
+    draw_compare_for_square(n, samples_square, c)
 
 
 if __name__ == "__main__":
