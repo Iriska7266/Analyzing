@@ -2,6 +2,7 @@ import random
 import matplotlib
 import matplotlib.pyplot
 import time
+import math
 
 LEFT_EDGE = -1000
 RIGHT_EDGE = 1000
@@ -37,14 +38,42 @@ def get_square_time(array: list[int]):
     return finish_time - start_time
 
 
+def draw_execution_time(n, samples_sorting, samples_summary, samples_square,):
+    matplotlib.pyplot.plot(n, samples_sorting, label="Sorting")
+    matplotlib.pyplot.plot(n, samples_summary, label="Summary")
+    matplotlib.pyplot.plot(n, samples_square, label="Square")
+
+    matplotlib.pyplot.legend()
+    matplotlib.pyplot.title("Execution time")
+    matplotlib.pyplot.xlabel("Count of numbers")
+    matplotlib.pyplot.ylabel("Time, ns")
+
+    matplotlib.pyplot.show()
+
+
+def draw_compare_for_sorting(n, sort_time):
+    """Common sort function has O(n*log(n)) difficulty"""
+    matplotlib.pyplot.plot(n, sort_time, label="Fact time")
+
+    y = [i * math.log2(i) for i in n]
+    matplotlib.pyplot.plot(n, y, label="Expecting time")
+
+    matplotlib.pyplot.title("1. Sorting algorithm")
+    matplotlib.pyplot.xlabel("Count of numbers")
+    matplotlib.pyplot.ylabel("Time, ns")
+    matplotlib.pyplot.legend()
+    matplotlib.pyplot.show()
+
+
 def part_1():
-    n = [10000, 11000, 12000, 13000]
+    n = [10000, 11000, 12000, 13000, 50000]
     #n = [1, 2, 5, 7, 10, 15, 20, 30, 50, 70, 100, 150, 200]
 
     samples_sorting = []
     samples_summary = []
     samples_square = []
 
+    # Getting time of every algorithm execution with different counts of numbers
     for count in n:
         numbers = generate_int_array(count)
 
@@ -57,15 +86,9 @@ def part_1():
         samples_summary.append(time_sum)
         samples_square.append(time_square)
 
-    matplotlib.pyplot.plot(n, samples_sorting, label="Sorting")
-    matplotlib.pyplot.plot(n, samples_summary, label="Summary")
-    matplotlib.pyplot.plot(n, samples_square, label="Square")
-    matplotlib.pyplot.legend()
-    matplotlib.pyplot.title("Execution time")
-    matplotlib.pyplot.xlabel("Count of numbers")
-    matplotlib.pyplot.ylabel("Time, ns")
+    #draw_execution_time(n, samples_sorting, samples_summary, samples_square)
 
-    matplotlib.pyplot.show()
+    draw_compare_for_sorting(n, samples_sorting)
 
 
 if __name__ == "__main__":
