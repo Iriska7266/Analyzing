@@ -16,7 +16,6 @@ def calculate_c_for_n_log_n(n_values, actual_times):
     numerator = np.sum(actual_array * n_log_n)
     denominator = np.sum(n_log_n * n_log_n)
     c = numerator / denominator
-    print(n_log_n,n_values)
     return c
 
 

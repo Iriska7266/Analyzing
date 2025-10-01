@@ -1,17 +1,18 @@
 from algorithms import get_bubble_sort_time, get_sorting_time
-from analyze import generate_int_array
+from algorithms import RIGHT_EDGE, LEFT_EDGE, generate_int_array
 
-def generating_list_to_sort(lenght, difficult):
+
+def generating_list_to_sort(length, difficulty):
     nums = []
-    if difficult == 'sorted':
-        for i in range(lenght):
+    if difficulty == 'sorted':
+        for i in range(length):
             nums.append(i)
 
-    elif difficult == 'unsorted':
-        nums = generate_int_array(-1000, 1000, lenght)
+    elif difficulty == 'unsorted':
+        nums = generate_int_array(LEFT_EDGE, RIGHT_EDGE, length)
 
-    else:
-        for i in range(lenght, -1, -1):
+    elif difficulty == 'rev sorted':
+        for i in range(length, -1, -1):
             nums.append(i)
 
     return nums
@@ -20,11 +21,9 @@ def main():
     lengths = [5, 50, 5000]
     difficulties = ['sorted', 'unsorted', 'rev sorted']
 
-    for diffiluctie in difficulties:
+    for difficulty in difficulties:
         for length in lengths:
-            list_numbers = generating_list_to_sort(length, diffiluctie)
-            time1 = get_bubble_sort_time(list_numbers)
-            time2 = get_sorting_time(list_numbers)
-            print(f'Длинна {length}, положение искомого числа в списке {diffiluctie}, время поиска элемента по самописанному алгоритму {time1}, время поиска элемента по алгоритму "index": {time2}')
-
-main()
+            numbers_list = generating_list_to_sort(length, difficulty)
+            time1 = get_bubble_sort_time(numbers_list)
+            time2 = get_sorting_time(numbers_list)
+            print(f'Длина {length}, набор данных {difficulty}, время сортировки по собственному алгоритму "bubble sort" {time1}, время сортировки по алгоритму "sort": {time2}')

@@ -1,4 +1,14 @@
 import time
+import random
+
+
+LEFT_EDGE = -1000
+RIGHT_EDGE = 1000
+
+
+def generate_int_array(left_edge: int, right_edge: int, length: int):
+    """Returns random integer array of 'length' elements"""
+    return [random.randint(left_edge, right_edge) for _ in range(length)]
 
 
 def get_sorting_time(array: list[int|float]):

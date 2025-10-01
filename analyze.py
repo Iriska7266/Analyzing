@@ -1,30 +1,16 @@
 import random
 import matplotlib
 import matplotlib.pyplot
-import time
 import math
 from constants import *
 from algorithms import *
-
-LEFT_EDGE = -1000
-RIGHT_EDGE = 1000
-
-
-def generate_int_array(LEFT_EDGE: int,RIGHT_EDGE: int, length: int):
-    """Returns random integer array of 'length' elements"""
-    return [random.randint(LEFT_EDGE, RIGHT_EDGE) for _ in range(length)]
+import test_find
+import test_sorting
 
 
 def draw_plot_with_attributes():
     matplotlib.pyplot.xlabel("Count of numbers")
     matplotlib.pyplot.ylabel("Time, ns")
-
-    # Adding axes
-    # ax = matplotlib.pyplot.gca()
-
-    # ax.axhline(y=0, color="red")
-    # ax.axvline(x=0, color="blue")
-
     matplotlib.pyplot.legend()
     matplotlib.pyplot.show()
 
@@ -84,7 +70,7 @@ def part_1():
 
     # Getting time of every algorithm execution with different counts of numbers
     for count in n:
-        numbers = generate_int_array(-1000,1000,count)
+        numbers = generate_int_array(LEFT_EDGE,RIGHT_EDGE,count)
 
         # Измеряем каждую операцию
         time_sort = get_sorting_time(numbers)
@@ -107,6 +93,14 @@ def part_1():
     draw_compare_for_square(n, samples_square, c)
 
 
+def part_2():
+    print("First algorithm 'sorting':")
+    test_sorting.main()
+    print("----------------------------------------------------------------------------------------------------------------------------------------------------")
+    print("Second algorithm 'find index':")
+    test_find.main()
+
+
 if __name__ == "__main__":
     part_1()
-
+    part_2()
