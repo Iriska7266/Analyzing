@@ -6,7 +6,7 @@ import numpy as np
  Используется метод наименьших квадратов: c = sum(fact_time * th_func) / sum(th_func^2)"""
 
 
-def calculate_c_n_log_n(n_values, actual_times):
+def calculate_c_for_n_log_n(n_values, actual_times):
     n_array = np.array(n_values)
     actual_array = np.array(actual_times)
 
