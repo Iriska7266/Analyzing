@@ -26,4 +26,4 @@ def main():
             numbers_list = generating_list_to_sort(length, difficulty)
             time1 = get_bubble_sort_time(numbers_list)
             time2 = get_sorting_time(numbers_list)
-            print(f'Длина {length}, набор данных {difficulty}, время сортировки по собственному алгоритму "bubble sort" {time1}, время сортировки по алгоритму "sort": {time2}')
+            print(f'Длина {length}, набор данных {difficulty}, время сортировки по собственному алгоритму "bubble sort": {time1}, время сортировки по алгоритму "sort": {time2}')

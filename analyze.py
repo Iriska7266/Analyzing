@@ -1,4 +1,3 @@
-import random
 import matplotlib
 import matplotlib.pyplot
 import math
@@ -28,21 +27,18 @@ def draw_execution_time(n: list[int], samples_sorting: list[int|float],
 
 def draw_compare_for_sorting(n, sort_time: list[int|float], c: int|float):
     """Common sort function has O(n*log(n)) difficulty"""
-    matplotlib.pyplot.plot(n, sort_time, label="Fact time")
-
     y = [i * math.log2(i) * c for i in n]
+    matplotlib.pyplot.plot(n, sort_time, label="Fact time")
     matplotlib.pyplot.plot(n, y, label="Expecting time")
 
     matplotlib.pyplot.title("1. Sorting algorithm")
     draw_plot_with_attributes()
 
 
-
 def draw_compare_for_summary(n: list[int], sum_time: list[int|float], c: int|float):
     """Common sum function has O(n) difficulty"""
-    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
-
     y = [i * c for i in n]
+    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
     matplotlib.pyplot.plot(n, y, label="Expecting time")
 
     matplotlib.pyplot.title("2. Summary algorithm")
@@ -51,9 +47,8 @@ def draw_compare_for_summary(n: list[int], sum_time: list[int|float], c: int|flo
 
 def draw_compare_for_square(n: list[int], sum_time: list[int|float], c: int|float):
     """Our square function has O(n) difficulty"""
-    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
-
     y = [i * c for i in n]
+    matplotlib.pyplot.plot(n, sum_time, label="Fact time")
     matplotlib.pyplot.plot(n, y, label="Expecting time")
 
     matplotlib.pyplot.title("3. Square algorithm")
@@ -72,7 +67,6 @@ def part_1():
     for count in n:
         numbers = generate_int_array(LEFT_EDGE,RIGHT_EDGE,count)
 
-        # Измеряем каждую операцию
         time_sort = get_sorting_time(numbers)
         time_sum = get_summary_time(numbers)
         time_square = get_square_time(numbers)
